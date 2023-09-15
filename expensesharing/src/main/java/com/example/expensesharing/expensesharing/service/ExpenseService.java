@@ -21,9 +21,8 @@ public class ExpenseService {
     }
 
     // Retrieve an expense by ID
-    public Expense getExpenseById(Long id) {
-        Optional<Expense> optionalExpense = expenseRepository.findById(id);
-        return optionalExpense.orElse(null);
+    public Optional<Expense> getExpenseById(Long id) {
+        return expenseRepository.findById(id);
     }
 
     // Add a new expense

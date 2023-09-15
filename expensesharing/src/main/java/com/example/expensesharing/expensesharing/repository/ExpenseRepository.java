@@ -7,6 +7,5 @@ import com.example.expensesharing.expensesharing.dto.Expense;
 
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     // You can define custom query methods here if needed
-    List<Expense> findByName(String name);
-
+    List<Expense> findByDescription(String description);
 }
