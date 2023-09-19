@@ -1,13 +1,13 @@
 package com.example.expensesharing.expensesharing.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.expensesharing.expensesharing.dto.Expense;
 import com.example.expensesharing.expensesharing.repository.ExpenseRepository;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ExpenseService {
@@ -32,7 +32,7 @@ public class ExpenseService {
     }
 
     // Update an existing expense
-    public Expense updateExpense(Long id, Expense updatedExpense) {
+    public boolean updateExpense(Long id, Expense updatedExpense) {
         Optional<Expense> optionalExpense = expenseRepository.findById(id);
         if (optionalExpense.isPresent()) {
             Expense expense = optionalExpense.get();
@@ -40,9 +40,10 @@ public class ExpenseService {
             expense.setName(updatedExpense.getName());
             expense.setAmount(updatedExpense.getAmount());
             // Add more fields as necessary
-            return expenseRepository.save(expense);
+            expenseRepository.save(expense);
+            return true;
         }
-        return null;
+        return false;
     }
 
     // Delete an expense by ID

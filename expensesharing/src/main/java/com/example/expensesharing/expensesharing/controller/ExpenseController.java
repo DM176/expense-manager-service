@@ -1,63 +1,68 @@
 package com.example.expensesharing.expensesharing.controller;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.example.expensesharing.expensesharing.service.ExpenseService;
-import com.example.expensesharing.expensesharing.dto.Expense;
 
 import java.util.List;
 
-@Controller
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.expensesharing.expensesharing.dto.Expense;
+import com.example.expensesharing.expensesharing.service.ExpenseService;
+
+@RestController
 @RequestMapping("/expenses")
 public class ExpenseController {
 
     @Autowired
     private ExpenseService expenseService;
 
-    // Display the list of expenses
+    // Get a list of all expenses
     @GetMapping("/")
-    public ModelAndView listExpenses(Model model) {
+    public ResponseEntity<List<Expense>> listExpenses() {
         List<Expense> expenses = expenseService.getAllExpenses();
-        model.addAttribute("expenses", expenses);
-        return new ModelAndView("expenses/list");
+        return ResponseEntity.ok(expenses);
     }
 
-    // Show the form for adding a new expense
-    @GetMapping("/add")
-    public ModelAndView showAddExpenseForm(Model model) {
-        model.addAttribute("expense", new Expense());
-        return new ModelAndView("expenses/add");
-    }
-
-    // Handle the submission of a new expense
+    // Add a new expense
     @PostMapping("/add")
-    public String addExpense(@ModelAttribute("expense") Expense expense) {
+    public ResponseEntity<String> addExpense(@RequestBody Expense expense) {
         expenseService.addExpense(expense);
-        return "redirect:/expenses/";
+        return ResponseEntity.ok("Expense added successfully.");
     }
 
-    // Show the form for editing an expense
-    @GetMapping("/edit/{id}")
-    public ModelAndView showEditExpenseForm(@PathVariable Long id, Model model) {
+    // Get details of a specific expense by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Expense> getExpense(@PathVariable Long id) {
         Expense expense = expenseService.getExpenseById(id);
-        model.addAttribute("expense", expense);
-        return new ModelAndView("expenses/edit");
+        if (expense != null) {
+            return ResponseEntity.ok(expense);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    // Handle the submission of an edited expense
-    @PostMapping("/edit/{id}")
-    public String editExpense(@PathVariable Long id, @ModelAttribute("expense") Expense expense) {
-        expenseService.updateExpense(id, expense);
-        return "redirect:/expenses/";
+    // Update an existing expense by ID
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateExpense(@PathVariable Long id, @RequestBody Expense expense) {
+        if (expenseService.updateExpense(id, expense)) {
+            return ResponseEntity.ok("Expense updated successfully.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    // Delete an expense
-    @GetMapping("/delete/{id}")
-    public String deleteExpense(@PathVariable Long id) {
+    // Delete an expense by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteExpense(@PathVariable Long id) {
         expenseService.deleteExpense(id);
-        return "redirect:/expenses/";
+        return ResponseEntity.ok("Expense updated successfully.");
+
     }
 }
