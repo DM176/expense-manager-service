@@ -7,47 +7,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
 
 @Entity
+@Data
 public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private BigDecimal amount;
+    private String expenseName;
+    private String expenseCategory;
+    private String exepenseDescription;
+    private BigDecimal expenseAmount;
     private Date expenseDate;
-
-    // Constructors, getters, setters, and other methods
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Date getExpenseDate() {
-        return expenseDate;
-    }
-
-    public void setExpenseDate(Date expenseDate) {
-        this.expenseDate = expenseDate;
-    }
 }

@@ -31,14 +31,14 @@ public class ExpenseController {
     }
 
     // Add a new expense
-    @PostMapping("/add")
+    @PostMapping("/add/")
     public ResponseEntity<String> addExpense(@RequestBody Expense expense) {
         expenseService.addExpense(expense);
         return ResponseEntity.ok("Expense added successfully.");
     }
 
     // Get details of a specific expense by ID
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/")
     public ResponseEntity<Expense> getExpense(@PathVariable Long id) {
         Expense expense = expenseService.getExpenseById(id);
         if (expense != null) {
@@ -49,7 +49,7 @@ public class ExpenseController {
     }
 
     // Update an existing expense by ID
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/")
     public ResponseEntity<String> updateExpense(@PathVariable Long id, @RequestBody Expense expense) {
         if (expenseService.updateExpense(id, expense)) {
             return ResponseEntity.ok("Expense updated successfully.");
@@ -59,7 +59,7 @@ public class ExpenseController {
     }
 
     // Delete an expense by ID
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/")
     public ResponseEntity<String> deleteExpense(@PathVariable Long id) {
         expenseService.deleteExpense(id);
         return ResponseEntity.ok("Expense updated successfully.");

@@ -37,8 +37,11 @@ public class ExpenseService {
         if (optionalExpense.isPresent()) {
             Expense expense = optionalExpense.get();
             // Update expense properties as needed
-            expense.setName(updatedExpense.getName());
-            expense.setAmount(updatedExpense.getAmount());
+            expense.setExpenseName(updatedExpense.getExpenseName());
+            expense.setExpenseAmount(updatedExpense.getExpenseAmount());
+            expense.setExepenseDescription(updatedExpense.getExepenseDescription());
+            expense.setExpenseDate(updatedExpense.getExpenseDate());
+            expense.setExpenseCategory(updatedExpense.getExpenseCategory());
             // Add more fields as necessary
             expenseRepository.save(expense);
             return true;
