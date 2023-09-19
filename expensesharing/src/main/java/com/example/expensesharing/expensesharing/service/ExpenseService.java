@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.expensesharing.expensesharing.dto.Account;
 import com.example.expensesharing.expensesharing.dto.Expense;
 import com.example.expensesharing.expensesharing.repository.ExpenseRepository;
 
@@ -14,6 +16,9 @@ public class ExpenseService {
 
     @Autowired
     private ExpenseRepository expenseRepository;
+
+    @Autowired
+    private AccountService accountService;
 
     // Retrieve all expenses
     public List<Expense> getAllExpenses() {
@@ -27,8 +32,16 @@ public class ExpenseService {
     }
 
     // Add a new expense
-    public Expense addExpense(Expense expense) {
-        return expenseRepository.save(expense);
+    public ResponseEntity<String> addExpense(Expense expense) {
+        if(expense.getAccount()!=null){
+            Long expenseId = expense.getAccount().getAccountId();
+            Optional<Account> account = accountService.getAccountById(expenseId);
+            if(account.isEmpty()==true){
+                return ResponseEntity.ok("Unable to add expense as the specified account does not exists");
+            }
+        }
+        expenseRepository.save(expense);
+        return ResponseEntity.ok("Expense added successfully.");
     }
 
     // Update an existing expense

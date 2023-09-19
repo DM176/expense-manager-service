@@ -31,10 +31,9 @@ public class ExpenseController {
     }
 
     // Add a new expense
-    @PostMapping("/add/")
+    @PostMapping("/")
     public ResponseEntity<String> addExpense(@RequestBody Expense expense) {
-        expenseService.addExpense(expense);
-        return ResponseEntity.ok("Expense added successfully.");
+        return expenseService.addExpense(expense);
     }
 
     // Get details of a specific expense by ID
@@ -62,7 +61,7 @@ public class ExpenseController {
     @DeleteMapping("/{id}/")
     public ResponseEntity<String> deleteExpense(@PathVariable Long id) {
         expenseService.deleteExpense(id);
-        return ResponseEntity.ok("Expense updated successfully.");
+        return ResponseEntity.ok("Expense deleted successfully.");
 
     }
 }
