@@ -70,7 +70,7 @@ public class BasicAuthSecurityConfiguration {
 	@Bean
 	public UserDetailsService userDetailService(DataSource dataSource) {
 
-		var user = User.withUsername("in28minutes")
+		var user = User.withUsername("daniyal")
 				// .password("{noop}dummy")
 				.password("dummy")
 				.passwordEncoder(str -> passwordEncoder().encode(str))
