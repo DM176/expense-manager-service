@@ -38,6 +38,7 @@ public class ExpenseController {
 
     // Get details of a specific expense by ID
     @GetMapping("/{id}/")
+    // @Secured("ROLE_USER")
     public ResponseEntity<Expense> getExpense(@PathVariable Long id) {
         Expense expense = expenseService.getExpenseById(id);
         if (expense != null) {
