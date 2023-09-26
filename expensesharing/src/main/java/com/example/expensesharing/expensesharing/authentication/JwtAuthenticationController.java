@@ -1,4 +1,4 @@
-package com.example.expensesharing.expensesharing.controller;
+package com.example.expensesharing.expensesharing.authentication;
 
 import java.time.Instant;
 import java.util.stream.Collectors;
