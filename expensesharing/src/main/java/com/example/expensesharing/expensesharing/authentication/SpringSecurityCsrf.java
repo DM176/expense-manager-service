@@ -1,4 +1,4 @@
-package com.example.expensesharing.expensesharing.controller;
+package com.example.expensesharing.expensesharing.authentication;
 
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;

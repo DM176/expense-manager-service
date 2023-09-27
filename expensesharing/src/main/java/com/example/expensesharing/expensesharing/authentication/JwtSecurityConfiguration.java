@@ -1,4 +1,4 @@
-package com.example.expensesharing.expensesharing.config;
+package com.example.expensesharing.expensesharing.authentication;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
