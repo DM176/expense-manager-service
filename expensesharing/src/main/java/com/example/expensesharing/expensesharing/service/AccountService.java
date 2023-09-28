@@ -3,7 +3,7 @@ package com.example.expensesharing.expensesharing.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.expensesharing.expensesharing.dto.Account;
@@ -13,7 +13,7 @@ import com.example.expensesharing.expensesharing.repository.AccountRepository;
 public class AccountService {
     private final AccountRepository accountRepository;
 
-    @Autowired
+    // @Autowired
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }

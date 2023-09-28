@@ -2,7 +2,7 @@ package com.example.expensesharing.expensesharing.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.expensesharing.expensesharing.dto.Category; // Updated import
@@ -14,7 +14,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @Autowired
+    // @Autowired
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
